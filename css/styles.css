@@ -1,0 +1,502 @@
+/* ==========================================================================
+   GEOmetric Portfolio Management Service (P) Ltd.
+   Design System & Master Stylesheet
+   Theme: Super Light Minimalist with Corporate Precision
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Custom Properties / Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Color Palette */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --bg-subtle: #F1F5F9;
+  
+  --nav-bg: #091932;
+  --nav-bg-hover: #132746;
+  --nav-text: #FFFFFF;
+  --nav-text-muted: #94A3B8;
+  --nav-accent: #38BDF8;
+  --nav-accent-glow: rgba(56, 189, 248, 0.25);
+  
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --text-highlight: #0284C7;
+  
+  --border-subtle: #E2E8F0;
+  --border-light: #F1F5F9;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Shadows & Elevation */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+  --shadow-banner: 0 8px 30px rgba(15, 23, 42, 0.06);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Baseline
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip link for accessibility */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 16px;
+  background: var(--nav-bg);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 1000;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 6px 6px;
+  transition: top var(--transition-fast);
+}
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* Accessible hidden h1 */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   3. Top Header (Logo Area)
+   -------------------------------------------------------------------------- */
+.site-header {
+  width: 100%;
+  background: var(--bg-primary);
+  padding: 24px 20px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.brand-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  transition: transform var(--transition-normal);
+}
+
+.brand-wrapper:hover {
+  transform: translateY(-1px);
+}
+
+.brand-logo {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: filter var(--transition-normal);
+}
+
+@media (min-width: 768px) {
+  .brand-logo {
+    max-width: 360px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Navigation Bar (Corporate Midnight Ribbon)
+   -------------------------------------------------------------------------- */
+.site-nav {
+  width: 100%;
+  background: var(--nav-bg);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 10px rgba(9, 25, 50, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+
+/* Mobile Toggle Button */
+.mobile-nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--nav-text);
+  font-size: 1.25rem;
+  padding: 10px;
+  cursor: pointer;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.mobile-nav-toggle:focus-visible {
+  outline: 2px solid var(--nav-accent);
+  outline-offset: 2px;
+}
+
+.hamburger-icon {
+  width: 22px;
+  height: 16px;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+.mobile-nav-toggle[aria-expanded="true"] .hamburger-icon span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.mobile-nav-toggle[aria-expanded="true"] .hamburger-icon span:nth-child(2) {
+  opacity: 0;
+}
+.mobile-nav-toggle[aria-expanded="true"] .hamburger-icon span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Nav Links List */
+.nav-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  padding: 12px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 18px;
+  right: 18px;
+  height: 2px;
+  background-color: var(--nav-accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--transition-normal);
+  border-radius: 2px;
+}
+
+.nav-link:hover {
+  color: var(--nav-accent);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--nav-accent);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
+/* External Link Indicator Icon (Subtle) */
+.external-icon {
+  width: 12px;
+  height: 12px;
+  opacity: 0.6;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.nav-link:hover .external-icon {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+
+/* Divider Pipe between links matching mockup */
+.nav-separator {
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 300;
+  font-size: 1rem;
+  user-select: none;
+  display: inline-block;
+  padding: 0 4px;
+}
+
+/* --------------------------------------------------------------------------
+   5. Hero / Body Section
+   -------------------------------------------------------------------------- */
+.main-content {
+  flex: 1 0 auto;
+  width: 100%;
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 40px;
+}
+
+.hero-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-image-card {
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: var(--shadow-banner);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  transition: box-shadow var(--transition-smooth), transform var(--transition-smooth);
+}
+
+.hero-image-card:hover {
+  box-shadow: 0 14px 38px rgba(15, 23, 42, 0.08);
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+/* --------------------------------------------------------------------------
+   6. Footer (Corporate Details)
+   -------------------------------------------------------------------------- */
+.site-footer {
+  width: 100%;
+  background: #FFFFFF;
+  border-top: 1px solid var(--border-subtle);
+  padding: 20px 20px 24px;
+  margin-top: auto;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.footer-row {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.footer-row:last-child {
+  margin-bottom: 0;
+}
+
+.footer-label {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-right: 2px;
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+  border-bottom: 1px dotted transparent;
+}
+
+.footer-link:hover {
+  color: var(--text-highlight);
+  border-bottom-color: var(--text-highlight);
+}
+
+.footer-link:focus-visible {
+  outline: 2px solid var(--text-highlight);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.footer-divider {
+  display: inline-block;
+  margin: 0 6px;
+  color: #CBD5E1;
+}
+
+/* --------------------------------------------------------------------------
+   7. Responsive Design (Mobile / Tablet Adjustments)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 18px 16px 14px;
+  }
+
+  .brand-logo {
+    max-width: 260px;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    padding: 6px 16px;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 8px 0 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-menu.is-active {
+    display: flex;
+    animation: fadeInSlide 200ms ease-out forwards;
+  }
+
+  .nav-item {
+    width: 100%;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .nav-separator {
+    display: none;
+  }
+
+  .main-content {
+    padding: 16px 12px 28px;
+  }
+
+  .hero-image-card {
+    border-radius: 6px;
+  }
+
+  .footer-container {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .footer-row {
+    margin-bottom: 8px;
+  }
+
+  .footer-divider {
+    display: none;
+  }
+
+  .footer-item-block {
+    display: block;
+    margin-top: 4px;
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
